@@ -2,19 +2,9 @@ package com.dbi.dto;
 
 public class ProjectDTO {
 	
-	private Integer projectID;
-	
 	private String projectName;
 	
-	private Integer empId;
-
-	public Integer getProjectID() {
-		return projectID;
-	}
-
-	public void setProjectID(Integer projectID) {
-		this.projectID = projectID;
-	}
+	private String projectLeader;
 
 	public String getProjectName() {
 		return projectName;
@@ -24,13 +14,14 @@ public class ProjectDTO {
 		this.projectName = projectName;
 	}
 
-	public Integer getEmpId() {
-		return empId;
+	public String getProjectLeader() {
+		return projectLeader;
 	}
 
-	public void setEmpId(Integer empId) {
-		this.empId = empId;
+	public void setProjectLeader(String projectLeader) {
+		this.projectLeader = projectLeader;
 	}
 	
 	
+
 }

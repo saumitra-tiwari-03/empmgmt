@@ -10,18 +10,85 @@
 <script src="js/app.js"></script>
 
 </head>
-<body ng-app="EmpMgmt" ng-controller="empCtrl">
-	<h1><u>Employee Management System</u></h1>
-	<div>
-		<h2><u>New Employee</u></h2>
-		<form ng-submit="submitEmp()">
-			Employee Code: <br>
-			<input type="text" ng-model="emp.empId"/><br>
-			Employee Name:<br>
-			<input type="text" ng-model="emp.empName"/><br><br>
+<body ng-app="EmpMgmt" >
+
+	<div class="container" ng-controller="ProjectCtrl">
+  	<h2><u>Employee Management System</u></h2>
+  	
+  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#employee">New Employee</button>
+  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#project" ng-click="openProjectForm()">New Project</button>
+  	<br><br>
+  	<div>
+  	<table class="table table-hover" >
+  	
+		      <tr>
+		        <th>Project ID</th>
+		        <th>Project Name</th>
+		        <th>Project Leader</th>
+		        <th>Actions</th>
+		      </tr>
+    
+    
+	      <tr ng-repeat="x in projects">
+	        <td>{{ x.projectID }}</td>
+	        <td>{{ x.projectName }}</td>
+	        <td>{{ x.projectLeader }}</td>
+	        <td>
+	        	<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#project" ng-click="updateProjectBtn(x.projectID)">Update</button>
+				<button type="button" class="btn btn-danger" ng-click="deleteProject(x.projectID)" >Delete</button>
+	        </td>
+	      </tr>
+	</table>
+  	</div>
+	
+  <!-- Modal -->
+  <div class="modal fade" id="employee" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create New Employee</h4>
+        </div>
+        <div class="modal-body">
+          	
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="modal fade" id="project" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create New Project</h4>
+        </div>
+        <div class="modal-body">
+         <form ng-submit="submitProject()">
+			Project Name :<br>
+			<input type="text" ng-model="project.projectName"/><br>
+			Project Leader :<br>
+			<input type="text" ng-model="project.projectLeader"/><br><br>
 			<button type="submit">Submit</button>
 		</form>
-		<span ng-bind="msg"></span>
-	</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="submitClick()">Close</button>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+</div>
 </body>
 </html>

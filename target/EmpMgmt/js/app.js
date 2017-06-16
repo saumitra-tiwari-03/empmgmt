@@ -5,8 +5,9 @@ app.controller('empCtrl', function($scope,$http) {
 	$url = "http://localhost:8080/EmpMgmt/saveEmp";
     $scope.submitEmp = function(){
     	$http.post($url, $scope.emp)
-        .success(function (data) {
-        	$scope.msg = data
+        .success(function (message) {
+        	$scope.msg = message,
+        	$scope.emp = ""
         })
     }
 });

@@ -17,9 +17,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired
 	private EmployeeRepo employeeRepo;
 	
-	public Employee create(Employee book) throws ServiceException {
+	public Employee create(Employee emp) throws ServiceException {
 
-		return employeeRepo.save(book);
+		return employeeRepo.save(emp);
 	}
 
 	public void delete(int id) throws ServiceException {

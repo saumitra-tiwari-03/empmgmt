@@ -2,6 +2,7 @@ package com.dbi.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dbi.dto.ProjectDTO;
 import com.dbi.jpa.Project;
 import com.dbi.service.ProjectService;
 
@@ -20,7 +22,7 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 
-	@RequestMapping("/getProjectDetails")
+	@RequestMapping(value = "/getProjectDetails" , produces = {"application/json"}, method = RequestMethod.GET)
 	public List<Project> getAllProjectDetails() {
 		List<Project> list = null;
 
@@ -34,10 +36,11 @@ public class ProjectController {
 
 	}
 
-	@RequestMapping(value = "/AddProject", produces = { "application/json" }, consumes = {
+	@RequestMapping(value = "/newProject", produces = { "application/json" }, consumes = {
 			"application/json" }, method = RequestMethod.POST)
-	public ResponseEntity<Project> createProject(@RequestBody Project project){
-
+	public ResponseEntity<Project> createProject(@RequestBody ProjectDTO projectDTO){
+		Project project = new Project();
+		BeanUtils.copyProperties(projectDTO, project);
 		projectService.create(project);
 		return new ResponseEntity<Project>(project, HttpStatus.OK);
 	}
