@@ -1,17 +1,28 @@
 var app = angular.module('EmpMgmt', []);
-
-app.controller('ProjectCtrl', function($scope,$http){
+app.controller('appController',function($scope,$http){
 	$url = "http://localhost:8080/EmpMgmt/";
 	loadProject();
+	loadEmployees();
 	
 	$scope.openProjectForm = function(){
-		$scope.project = {projectID:null,projectName:'',projectLeader:''};
+		$scope.project = null;
 	}
 	
+	$scope.openEmployeeForm = function(){
+		$scope.emp = null;
+		$http.get($url+"getProjectDetails")
+		.then(function (response) {
+			$scope.projects = response.data;
+			});
+	}
 	$scope.submitClick = function(){
 		loadProject();
 	}
-	
+	/*
+	 * 
+	 * For Projects
+	 * 
+	 * */
 	function loadProject(){
 		$http.get($url+"getProjectDetails")
 		.then(function (response) {
@@ -26,6 +37,11 @@ app.controller('ProjectCtrl', function($scope,$http){
 	        	$scope.msg = message,
 	        	$scope.project = ""
 	        });
+		}else{
+			$http.put($url+"editProjectDetails",$scope.project)
+			.then(function(response){
+				alert("update done");
+			});
 		}
     }
 	
@@ -41,26 +57,27 @@ app.controller('ProjectCtrl', function($scope,$http){
 		$http.get($url+"ProjectById/"+id)
 		.then(function(response){
 			$scope.project = response.data
-			alert(JSON.stringify(response));
 		});
-		
-		$http.put($url+"editProjectDetails",$scope.project)
+	}
+	
+	/*
+	 * 
+	 * For Employee
+	 * 
+	 * */
+	
+	$scope.submitEmployee = function submitEmployee(){
+		$http.post($url+"saveEmp",$scope.employee)
+		.then(function (message) {
+        	$scope.msg = message,
+        	$scope.employee = null
+        });
+	}
+	
+	function loadEmployees(){
+		$http.get($url+"getEmployees")
 		.then(function(response){
-			
+			alert(response.data);
 		});
 	}
 });
-
-/*app.controller('ProjectCtrl', function($scope,$http) {
-    //alert("angular controller called");
-	
-	$url = "http://localhost:8080/EmpMgmt/newProject";
-    $scope.submitProject = function(){
-    	$http.post($url, $scope.project)
-        .success(function (message) {
-        	$scope.msg = message,
-        	$scope.emp = ""
-        })
-    }
-});*/
-

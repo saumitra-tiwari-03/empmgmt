@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Employee" ,schema="empmgmt")
 public class Employee {
@@ -23,8 +25,9 @@ public class Employee {
 	
 	private Integer empMobile;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROJECT_ID", nullable = false)
+	//@JsonIgnore
 	private Project project;
 
 	public Integer getEmpId() {

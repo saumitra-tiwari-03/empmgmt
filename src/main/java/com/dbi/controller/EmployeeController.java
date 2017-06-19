@@ -24,8 +24,8 @@ public class EmployeeController {
 		return "newEmp";
 	}
 	
-	@RequestMapping(value="/saveEmp", consumes = { "application/json" }, method = RequestMethod.POST)
-	//@ResponseStatus(value=HttpStatus.OK)
+	@RequestMapping(value = "/saveEmp", produces = { "application/json" }, consumes = {
+	"application/json" }, method = RequestMethod.POST)
 	public String saveEmp( @RequestBody Employee emp){
 		System.out.println("invoked");
 		empService.create(emp);
@@ -34,8 +34,8 @@ public class EmployeeController {
 
 	}
 	
-	@RequestMapping("/getEmployeeList")
-	public List<Employee> getAllBookDetails() {
+	@RequestMapping(value = "/getEmployees", produces = { "application/json" }, method=RequestMethod.GET)
+	public List<Employee> getAllEmployees() {
 		List<Employee> list = null;
 
 		try {
