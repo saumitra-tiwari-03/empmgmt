@@ -23,13 +23,13 @@
 		  		<div id="projects" class="tab-pane fade in active">
 			  		<table class="table table-hover" >
 				  		<tr>
-					      <th>Project ID</th>
+					      <th>Project Code</th>
 					      <th>Project Name</th>
 					      <th>Project Leader</th>
 					      <th>Actions</th>
 					    </tr>
 					    <tr ng-repeat="x in projects">
-					        <td>{{ x.projectID }}</td>
+					        <td>{{ x.projectCode }}</td>
 					        <td>{{ x.projectName }}</td>
 					        <td>{{ x.projectLeader }}</td>
 					        <td>
@@ -42,14 +42,23 @@
 				<div id="employees" class="tab-pane fade">
 					<table class="table table-hover">
 						<tr>
-						    <th>Employee ID</th>
+						    <th>Employee Code</th>
 						    <th>Employee Name</th>
 						    <th>Emploee Email</th>
 						    <th>Employee Mobile</th>
 						    <th>Emploee Project</th>
 						    <th>Actions</th>
 						</tr>
-						<tr>
+						<tr ng-repeat="y in employees">
+							<td>{{y.empCode}}</td>
+							<td>{{y.empName}}</td>
+							<td>{{y.empEmail}}</td>
+							<td>{{y.empMobile}}</td>
+							<td>{{y.project.projectName}}</td>
+							<td>
+					        	<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#employee" ng-click="updateEmpBtn(y.empId)">Update</button>
+								<button type="button" class="btn btn-danger" ng-click="deleteEmployee(y.empId)" >Delete</button>
+					        </td>
 						</tr>      
 					</table>
 				</div>
@@ -65,6 +74,8 @@
 				        </div>
 				        <div class="modal-body">
 				          	<form>
+				          		Employee Code:<br>
+				          		<input type="text" ng-model="employee.empCode"/><br>
 				          		Employee Name:<br>
 				          		<input type="text" ng-model="employee.empName"/><br>
 				          		Employee Email:<br>
@@ -77,7 +88,7 @@
 				          	</form>
 				        </div>
 				        <div class="modal-footer">
-				          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				          	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeEmployee()">Close</button>
 				        </div>
 			    	</div>
 			    </div>
@@ -93,6 +104,8 @@
 						</div>
 					   	<div class="modal-body">
 					    	<form>
+					    		Project Code:<br>
+					    		<input type="text" ng-model="project.projectCode"/><br>
 								Project Name :<br>
 								<input type="text" ng-model="project.projectName"/><br>
 								Project Leader :<br>
@@ -101,7 +114,7 @@
 							</form>
 					 	</div>
 						<div class="modal-footer">
-						  <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="submitClick()">Close</button>
+						  <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeProject()">Close</button>
 						</div>
 					</div>
 				</div>

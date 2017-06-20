@@ -1,5 +1,6 @@
 package com.dbi.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name="Employee" ,schema="empmgmt")
 public class Employee {
@@ -19,6 +18,9 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer empId;
 	
+	@Column(unique = true)
+	private Integer empCode;
+	
 	private String empName;
 	
 	private String empEmail;
@@ -26,7 +28,7 @@ public class Employee {
 	private Integer empMobile;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PROJECT_ID", nullable = false)
+	@JoinColumn(name = "PROJECT_CODE", referencedColumnName = "projectCode",nullable = false)
 	//@JsonIgnore
 	private Project project;
 
@@ -36,6 +38,14 @@ public class Employee {
 
 	public void setEmpId(Integer empId) {
 		this.empId = empId;
+	}
+	
+	public Integer getEmpCode() {
+		return empCode;
+	}
+
+	public void setEmpCode(Integer empCode) {
+		this.empCode = empCode;
 	}
 
 	public String getEmpName() {

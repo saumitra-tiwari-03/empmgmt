@@ -15,7 +15,7 @@ app.controller('appController',function($scope,$http){
 			$scope.projects = response.data;
 			});
 	}
-	$scope.submitClick = function(){
+	$scope.closeProject = function(){
 		loadProject();
 	}
 	/*
@@ -67,17 +67,38 @@ app.controller('appController',function($scope,$http){
 	 * */
 	
 	$scope.submitEmployee = function submitEmployee(){
-		$http.post($url+"saveEmp",$scope.employee)
-		.then(function (message) {
-        	$scope.msg = message,
-        	$scope.employee = null
-        });
+		if($scope.employee.empId === null){
+			$http.post($url+"saveEmp",$scope.employee)
+			.then(function (message) {
+	        	$scope.msg = message,
+	        	$scope.employee = null
+	        });
+		}else{
+			$http.put($url+"editEmployeeDetails",$scope.employee)
+			.then(function(message){
+				$scope.msg = message;
+				$scope.employee = null;
+				alert("Update done");
+			});
+		}
+		
+	}
+	
+	$scope.updateEmpBtn = function updateEmpBtn(id){
+		$http.get($url+"employeeById/"+id)
+		.then(function(response){
+			$scope.employee = response.data
+		});
 	}
 	
 	function loadEmployees(){
 		$http.get($url+"getEmployees")
 		.then(function(response){
-			alert(response.data);
+			$scope.employees = response.data
 		});
+	}
+	
+	$scope.closeEmployee = function(){
+		loadEmployees();
 	}
 });
