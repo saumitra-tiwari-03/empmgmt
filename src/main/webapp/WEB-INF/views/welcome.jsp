@@ -12,8 +12,7 @@
 	<body ng-app="EmpMgmt" ng-controller="appController">
 		<div class="container">
 	  		<h2><u>Employee Management System</u></h2>
-	  		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#employee" ng-click="openEmployeeForm()">New Employee</button>
-		  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#project" ng-click="openProjectForm()">New Project</button>
+	  		
 		  	<br><br>
 		  	<ul class="nav nav-tabs">
 			  <li class="active"><a data-toggle="tab" href="#projects">Projects</a></li>
@@ -62,8 +61,10 @@
 						</tr>      
 					</table>
 				</div>
-		  	</div>
-			<!-- Modal -->
+		  	</div><br><br>
+		  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#project" ng-click="openProjectForm()">New Project</button>
+		  	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#employee" ng-click="openEmployeeForm()">New Employee</button>
+		  	<!-- Modal -->
 			<div class="modal fade" id="employee" role="dialog">
 			    <div class="modal-dialog">
 			    	<!-- Modal content-->
